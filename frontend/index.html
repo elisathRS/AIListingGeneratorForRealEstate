@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ListPro — AI Listing Generator</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+
+  <!-- Loading Overlay -->
+  <div class="spinner-overlay" id="spinnerOverlay">
+    <div class="spinner-box">
+      <div class="spinner"></div>
+      <p class="spinner-text">Generating your listing with AI…<br><span>This takes about 15 seconds</span></p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-mark">L</span>
+        <span class="logo-text">ListPro</span>
+      </div>
+      <p class="header-tagline">AI-Powered Real Estate Listing Generator</p>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main-container">
+    <div class="form-card">
+      <div class="form-card-header">
+        <h2>New Property Listing</h2>
+        <p>Fill in the details below and let AI generate your professional content instantly.</p>
+      </div>
+
+      <form id="listingForm" novalidate>
+
+        <!-- ── Section 1: Property Details ── -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <span class="section-number">1</span> Property Details
+          </h3>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="property_type">Property Type <span class="required">*</span></label>
+              <select id="property_type" name="property_type" required>
+                <option value="" disabled selected>Select type…</option>
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Land">Land</option>
+                <option value="Penthouse">Penthouse</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label>Operation <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="operation" value="Sale" required /> For Sale
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="operation" value="Rent" /> For Rent
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="address">Address / Location <span class="required">*</span></label>
+            <input type="text" id="address" name="address" placeholder="e.g. 123 Maple Street" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="city">City <span class="required">*</span></label>
+              <input type="text" id="city" name="city" placeholder="e.g. Austin" required />
+            </div>
+
+            <div class="field-group">
+              <label for="state">State <span class="required">*</span></label>
+              <select id="state" name="state" required>
+                <option value="" disabled selected>Select state…</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+                <option>Arkansas</option><option>California</option><option>Colorado</option>
+                <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+                <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+                <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+                <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+                <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+                <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+                <option>Texas</option><option>Utah</option><option>Vermont</option>
+                <option>Virginia</option><option>Washington</option><option>Washington D.C.</option>
+                <option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group price-group">
+            <label for="price">Listing Price (USD) <span class="required">*</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" id="price" name="price" placeholder="e.g. 450000" min="1" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Section 2: Property Specs ── -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <span class="section-number">2</span> Property Specs
+          </h3>
+
+          <div class="field-row field-row-3">
+            <div class="field-group">
+              <label for="bedrooms">Bedrooms <span class="required">*</span></label>
+              <input type="number" id="bedrooms" name="bedrooms" min="0" max="10" placeholder="0" required />
+            </div>
+            <div class="field-group">
+              <label for="bathrooms">Bathrooms <span class="required">*</span></label>
+              <input type="number" id="bathrooms" name="bathrooms" min="0" max="10" placeholder="0" required />
+            </div>
+            <div class="field-group">
+              <label for="parking">Parking Spaces <span class="required">*</span></label>
+              <input type="number" id="parking" name="parking" min="0" placeholder="0" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="built_area">Built Area (sq ft) <span class="required">*</span></label>
+              <input type="number" id="built_area" name="built_area" min="1" placeholder="e.g. 1800" required />
+            </div>
+            <div class="field-group">
+              <label for="land_area">Land Area (sq ft)</label>
+              <input type="number" id="land_area" name="land_area" min="0" placeholder="e.g. 5000 (optional)" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Section 3: Amenities ── -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <span class="section-number">3</span> Amenities
+          </h3>
+          <div class="checkbox-grid">
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Pool" /> Pool</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Garden / Backyard" /> Garden / Backyard</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="24h Security" /> 24h Security</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Gym / Fitness Center" /> Gym / Fitness Center</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Playground" /> Playground</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Event Hall" /> Event Hall</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Rooftop Terrace" /> Rooftop Terrace</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Service Room" /> Service Room</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Storage Unit" /> Storage Unit</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Elevator" /> Elevator</label>
+          </div>
+        </div>
+
+        <!-- ── Section 4: Agent Notes ── -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <span class="section-number">4</span> Agent Notes
+          </h3>
+          <div class="field-group">
+            <label for="agent_notes">Key Highlights <span class="hint">(2–3 lines — anything special the AI should emphasize)</span></label>
+            <textarea id="agent_notes" name="agent_notes" rows="3"
+              placeholder="e.g. Recently renovated kitchen, walking distance to downtown, great school district, motivated seller…"></textarea>
+          </div>
+        </div>
+
+        <!-- ── Section 5: Photos ── -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <span class="section-number">5</span> Property Photos
+          </h3>
+
+          <div class="field-group">
+            <label for="cover_photo">Cover Photo <span class="required">*</span> <span class="hint">(main image — used on PDF and Instagram)</span></label>
+            <div class="file-drop-zone" id="coverDropZone">
+              <input type="file" id="cover_photo" name="cover_photo" accept="image/*" required class="file-input" />
+              <div class="file-drop-content">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <p>Click to upload or drag &amp; drop</p>
+                <span>JPG, PNG, WEBP — recommended 1080px+</span>
+              </div>
+              <p class="file-name" id="coverFileName">No file selected</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="additional_photos">Additional Photos <span class="hint">(optional — up to 10, used in PDF and video reel)</span></label>
+            <div class="file-drop-zone" id="additionalDropZone">
+              <input type="file" id="additional_photos" name="additional_photos" accept="image/*" multiple class="file-input" />
+              <div class="file-drop-content">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <p>Click to upload multiple photos</p>
+                <span>Select several files at once</span>
+              </div>
+              <p class="file-name" id="additionalFileNames">No files selected</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Section 6: Agent Info ── -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <span class="section-number">6</span> Agent Information
+          </h3>
+
+          <div class="field-group">
+            <label for="agent_name">Full Name <span class="required">*</span></label>
+            <input type="text" id="agent_name" name="agent_name" placeholder="e.g. Sarah Johnson" required />
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="agent_phone">Phone <span class="required">*</span></label>
+              <input type="tel" id="agent_phone" name="agent_phone" placeholder="e.g. (512) 555-0123" required />
+            </div>
+            <div class="field-group">
+              <label for="agent_email">Email <span class="required">*</span></label>
+              <input type="email" id="agent_email" name="agent_email" placeholder="e.g. sarah@realty.com" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Submit ── -->
+        <div class="form-submit">
+          <div class="error-banner" id="errorBanner" style="display:none;"></div>
+          <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+            <span class="btn-icon">✨</span> Generate Listing
+          </button>
+          <p class="submit-hint">AI will generate your description, Instagram caption, PDF, and social image.</p>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

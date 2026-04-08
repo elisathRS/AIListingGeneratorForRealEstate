@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.env
+
+# Uploads (property photos & generated files)
+backend/uploads/
+
+# Node
+video/node_modules/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

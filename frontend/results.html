@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ListPro — Your Listing</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-mark">L</span>
+        <span class="logo-text">ListPro</span>
+      </div>
+      <p class="header-tagline">AI-Powered Real Estate Listing Generator</p>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main-container results-container">
+
+    <!-- Property Title Bar -->
+    <div class="results-title-bar">
+      <div>
+        <h2 id="propertyTitle">Loading…</h2>
+        <p id="propertySubtitle" class="property-subtitle"></p>
+      </div>
+      <a href="/" class="btn btn-outline btn-sm">← New Listing</a>
+    </div>
+
+    <!-- No Data Warning -->
+    <div class="no-data-warning" id="noDataWarning" style="display:none;">
+      <p>No listing data found. <a href="/">Go back and generate a listing first.</a></p>
+    </div>
+
+    <!-- Results Grid -->
+    <div class="results-grid" id="resultsGrid">
+
+      <!-- Description Card -->
+      <div class="result-card">
+        <div class="result-card-header">
+          <div class="result-card-title">
+            <span class="card-icon">📝</span>
+            <h3>Professional Description</h3>
+          </div>
+          <button class="btn btn-copy" id="copyDescBtn" onclick="copyText('descriptionText', 'copyDescBtn')">
+            Copy
+          </button>
+        </div>
+        <div class="result-card-body">
+          <div class="result-text" id="descriptionText">Loading…</div>
+        </div>
+      </div>
+
+      <!-- Instagram Caption Card -->
+      <div class="result-card">
+        <div class="result-card-header">
+          <div class="result-card-title">
+            <span class="card-icon">📱</span>
+            <h3>Instagram Caption</h3>
+          </div>
+          <button class="btn btn-copy" id="copyCaptionBtn" onclick="copyText('captionText', 'copyCaptionBtn')">
+            Copy
+          </button>
+        </div>
+        <div class="result-card-body">
+          <div class="result-text instagram-caption" id="captionText">Loading…</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="actions-bar">
+      <div class="actions-title">
+        <h3>Download & Publish</h3>
+        <p>Your assets are ready — download or post directly.</p>
+      </div>
+
+      <div class="actions-grid">
+
+        <!-- PDF -->
+        <div class="action-card">
+          <div class="action-card-icon action-icon-pdf">📄</div>
+          <div class="action-card-body">
+            <h4>PDF Flyer</h4>
+            <p>Print-ready flyer with photos, stats, and agent info.</p>
+          </div>
+          <button class="btn btn-action btn-pdf" id="pdfBtn" onclick="downloadAsset('pdf')">
+            ⬇ Download PDF
+          </button>
+        </div>
+
+        <!-- Instagram Image -->
+        <div class="action-card">
+          <div class="action-card-icon action-icon-image">🖼</div>
+          <div class="action-card-body">
+            <h4>Instagram Image</h4>
+            <p>1080×1080 square image with price, location, and details.</p>
+          </div>
+          <button class="btn btn-action btn-image" id="imageBtn" onclick="downloadAsset('image')">
+            ⬇ Download Image
+          </button>
+        </div>
+
+        <!-- Post to Instagram -->
+        <div class="action-card">
+          <div class="action-card-icon action-icon-instagram">📲</div>
+          <div class="action-card-body">
+            <h4>Post to Instagram</h4>
+            <p>Publish the generated image directly to your Instagram account.</p>
+          </div>
+          <button class="btn btn-action btn-instagram" id="instagramBtn" onclick="postToInstagram()">
+            Post to Instagram
+          </button>
+          <div class="instagram-status" id="instagramStatus"></div>
+        </div>
+
+        <!-- Video Reel -->
+        <div class="action-card">
+          <div class="action-card-icon action-icon-video">🎬</div>
+          <div class="action-card-body">
+            <h4>Video Reel</h4>
+            <p>1080×1920 vertical reel with Ken Burns transitions for Instagram &amp; TikTok.</p>
+          </div>
+          <button class="btn btn-action btn-video" id="videoBtn" onclick="generateVideo()">
+            Generate Video
+          </button>
+          <div class="video-progress" id="videoProgress" style="display:none;">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+            <p class="progress-label" id="progressLabel">Rendering your reel… this takes ~30 seconds</p>
+          </div>
+          <div class="video-download" id="videoDownload" style="display:none;">
+            <a class="btn btn-action btn-video-dl" id="videoDownloadLink" href="#" target="_blank">⬇ Download Reel</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
