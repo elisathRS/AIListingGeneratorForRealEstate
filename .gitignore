@@ -8,6 +8,9 @@ venv/
 # Uploads (property photos & generated files)
 backend/uploads/
 
+# Test/generated photos in video public dir
+video/public/photos/
+
 # Node
 video/node_modules/
 
