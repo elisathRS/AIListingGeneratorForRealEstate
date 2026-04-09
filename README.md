@@ -39,6 +39,8 @@ A full-stack AI-powered marketing content generator for real estate agents, incl
 
 ## Walkthrough
 
+<img src='videoWT.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 1. Agent opens the web form at `http://localhost:8000`
 2. Fills in property details (address, price, beds, baths, type, description)
 3. Uploads property photos
